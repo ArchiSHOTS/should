@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const SITE_URL = "https://www.yoursecondthought.com";
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yoursecondthought.com"),
   title: "Your Second Thought — Think Before You Post",
   description:
     "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
@@ -10,11 +12,11 @@ export const metadata: Metadata = {
     title: "Your Second Thought — Think Before You Post",
     description:
       "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
-    url: "https://yoursecondthought.com",
+    url: SITE_URL,
     siteName: "Your Second Thought",
     images: [
       {
-        url: "/og-image.png",
+        url: OG_IMAGE,
         width: 1500,
         height: 1000,
         alt: "Your Second Thought — The space between impulse and regret",
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     title: "Your Second Thought — Think Before You Post",
     description:
       "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
-    images: ["/og-image.png"],
+    images: [OG_IMAGE],
   },
 };
 
