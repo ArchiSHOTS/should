@@ -2,9 +2,34 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Your Second Thought",
+  metadataBase: new URL("https://your-second-thought-vercel.app"),
+  title: "Your Second Thought — Think Before You Post",
   description:
-    "The space between impulse and regret. A privacy-first mindful buffer for social media — end-to-end encrypted, zero tracking.",
+    "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
+  openGraph: {
+    title: "Your Second Thought — Think Before You Post",
+    description:
+      "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
+    url: "https://your-second-thought-vercel.app",
+    siteName: "Your Second Thought",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1500,
+        height: 1000,
+        alt: "Your Second Thought — The space between impulse and regret",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Your Second Thought — Think Before You Post",
+    description:
+      "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
