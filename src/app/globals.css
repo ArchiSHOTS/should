@@ -1,26 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Design Tokens ── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-background:    #F7F5F0;
+  --color-parchment:     #FAFAF7;
+  --color-sage:          #7B9E87;
+  --color-sage-dark:     #5E8570;
+  --color-amber:         #D4A373;
+  --color-amber-dark:    #B8865A;
+  --color-rose-muted:    #9B7070;
+
+  /* Typography */
+  --font-sans:   "Inter", system-ui, sans-serif;
+  --font-serif:  "Lora", Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background-color: var(--color-background);
+  color: #2C2C2C;
+  font-family: var(--font-sans);
+}
+
+/* Smooth text selection color */
+::selection {
+  background-color: #7B9E8730;
+}
+
+/* ── Utilities ── */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Breathing animation for the header tagline */
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
 }
