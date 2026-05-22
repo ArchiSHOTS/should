@@ -2,105 +2,40 @@
 
 import { useState, useEffect } from "react";
 import type { Context, Mood, Goal, InterrogationAnswers } from "@/types";
+import {
+  BriefcaseIcon, LeafIcon, ZapIcon, SparklesIcon,
+  WavesIcon, StarIcon, FlameIcon, CloudRainIcon, EyeIcon,
+  LightbulbIcon, LinkIcon, WindIcon, CompassIcon, SwordsIcon,
+} from "@/components/Icons";
 
 interface Option<T> {
   value: T;
   label: string;
-  emoji: string;
+  icon: React.ReactNode;
   description: string;
 }
 
 const contextOptions: Option<Context>[] = [
-  {
-    value: "professional",
-    label: "Professional",
-    emoji: "💼",
-    description: "Work, career, industry, colleagues",
-  },
-  {
-    value: "personal",
-    label: "Personal",
-    emoji: "🌿",
-    description: "Friends, family, life experiences",
-  },
-  {
-    value: "conflict",
-    label: "Conflict",
-    emoji: "⚡",
-    description: "Disagreement, frustration, confrontation",
-  },
-  {
-    value: "creative",
-    label: "Creative",
-    emoji: "✨",
-    description: "Art, ideas, projects, expression",
-  },
+  { value: "professional", label: "Professional", icon: <BriefcaseIcon size={22} />, description: "Work, career, industry, colleagues" },
+  { value: "personal",     label: "Personal",     icon: <LeafIcon size={22} />,      description: "Friends, family, life experiences" },
+  { value: "conflict",     label: "Conflict",     icon: <ZapIcon size={22} />,       description: "Disagreement, frustration, confrontation" },
+  { value: "creative",     label: "Creative",     icon: <SparklesIcon size={22} />,  description: "Art, ideas, projects, expression" },
 ];
 
 const moodOptions: Option<Mood>[] = [
-  {
-    value: "calm",
-    label: "Calm",
-    emoji: "🌊",
-    description: "Clear-headed, balanced, at ease",
-  },
-  {
-    value: "excited",
-    label: "Excited",
-    emoji: "🌟",
-    description: "Energised, enthusiastic, inspired",
-  },
-  {
-    value: "angry",
-    label: "Angry",
-    emoji: "🔥",
-    description: "Frustrated, irritated, heated",
-  },
-  {
-    value: "sad",
-    label: "Sad",
-    emoji: "🌧",
-    description: "Hurt, grieving, low, depleted",
-  },
-  {
-    value: "seeking_validation",
-    label: "Seeking Validation",
-    emoji: "🪞",
-    description: "Wanting reassurance, approval, or likes",
-  },
+  { value: "calm",               label: "Calm",               icon: <WavesIcon size={22} />,     description: "Clear-headed, balanced, at ease" },
+  { value: "excited",            label: "Excited",            icon: <StarIcon size={22} />,      description: "Energised, enthusiastic, inspired" },
+  { value: "angry",              label: "Angry",              icon: <FlameIcon size={22} />,     description: "Frustrated, irritated, heated" },
+  { value: "sad",                label: "Sad",                icon: <CloudRainIcon size={22} />, description: "Hurt, grieving, low, depleted" },
+  { value: "seeking_validation", label: "Seeking Validation", icon: <EyeIcon size={22} />,       description: "Wanting reassurance, approval, or likes" },
 ];
 
 const goalOptions: Option<Goal>[] = [
-  {
-    value: "to_inform",
-    label: "To Inform",
-    emoji: "💡",
-    description: "Share knowledge, news, or insight",
-  },
-  {
-    value: "to_connect",
-    label: "To Connect",
-    emoji: "🤝",
-    description: "Build relationship, express care",
-  },
-  {
-    value: "to_vent",
-    label: "To Vent",
-    emoji: "💨",
-    description: "Release feelings, blow off steam",
-  },
-  {
-    value: "to_seek_advice",
-    label: "To Seek Advice",
-    emoji: "🧭",
-    description: "Ask for help, perspective, or guidance",
-  },
-  {
-    value: "to_get_revenge",
-    label: "To Get Revenge",
-    emoji: "⚔️",
-    description: "Shame, expose, or retaliate against someone",
-  },
+  { value: "to_inform",      label: "To Inform",      icon: <LightbulbIcon size={22} />, description: "Share knowledge, news, or insight" },
+  { value: "to_connect",     label: "To Connect",     icon: <LinkIcon size={22} />,      description: "Build relationship, express care" },
+  { value: "to_vent",        label: "To Vent",        icon: <WindIcon size={22} />,      description: "Release feelings, blow off steam" },
+  { value: "to_seek_advice", label: "To Seek Advice", icon: <CompassIcon size={22} />,   description: "Ask for help, perspective, or guidance" },
+  { value: "to_get_revenge", label: "To Get Revenge", icon: <SwordsIcon size={22} />,    description: "Shame, expose, or retaliate against someone" },
 ];
 
 const steps = [
@@ -245,7 +180,7 @@ export default function InterrogationModal({
               onClick={() => selectOption(opt.value)}
               className="group flex items-center gap-4 w-full text-left p-4 rounded-2xl border border-stone-200 bg-white/60 hover:border-sage hover:bg-sage/5 transition-all duration-200 hover:shadow-sm"
             >
-              <span className="text-2xl shrink-0">{opt.emoji}</span>
+              <span className="shrink-0 text-sage">{opt.icon}</span>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-stone-800 group-hover:text-sage-dark transition-colors">
                   {opt.label}

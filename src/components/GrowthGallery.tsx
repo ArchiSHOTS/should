@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { decrypt } from "@/lib/crypto";
 import { hashUserId } from "@/lib/crypto";
 import type { AuthState, DecryptedEntry, JournalEntry } from "@/types";
+import { CheckIcon, PauseIcon, XIcon, LeafIcon, ChevronDownIcon } from "@/components/Icons";
 
 const verdictColors = {
   POST: "text-sage bg-sage/10 border-sage/25",
@@ -11,7 +12,11 @@ const verdictColors = {
   DROP: "text-rose-muted bg-rose-muted/10 border-rose-muted/25",
 };
 
-const verdictIcons = { POST: "✓", HOLD: "⏸", DROP: "✕" };
+const verdictIcons = {
+  POST: <CheckIcon size={11} />,
+  HOLD: <PauseIcon size={11} />,
+  DROP: <XIcon size={11} />,
+};
 
 const moodLabels: Record<string, string> = {
   calm: "Calm",
@@ -93,7 +98,7 @@ export default function GrowthGallery({ auth }: GrowthGalleryProps) {
   if (entries.length === 0) {
     return (
       <div className="text-center py-20">
-        <p className="text-4xl mb-4">🌱</p>
+        <div className="flex justify-center mb-4 text-sage"><LeafIcon size={40} /></div>
         <h3 className="text-xl font-serif text-stone-700 mb-2">Your gallery is empty.</h3>
         <p className="text-sm text-stone-400 max-w-xs mx-auto leading-relaxed">
           Thoughts you save during the advice flow will appear here, fully
@@ -147,13 +152,10 @@ export default function GrowthGallery({ auth }: GrowthGalleryProps) {
                   </div>
                 </div>
 
-                <span
-                  className={`text-stone-300 text-xs transition-transform duration-200 ${
-                    isExpanded ? "rotate-180" : ""
-                  }`}
-                >
-                  ▾
-                </span>
+                <ChevronDownIcon
+                  size={14}
+                  className={`text-stone-300 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                />
               </div>
             </button>
 

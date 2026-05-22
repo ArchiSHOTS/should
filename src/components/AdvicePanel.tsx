@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { AdviceResult, InterrogationAnswers, AuthState } from "@/types";
+import { CheckIcon, PauseIcon, XIcon, ClockIcon, AlertIcon, ChevronDownIcon } from "@/components/Icons";
 import { getRandomQuote, type Quote } from "@/lib/quotes";
 import { analyzeText } from "@/lib/advice-engine";
 import { encrypt, hashUserId } from "@/lib/crypto";
@@ -22,7 +23,7 @@ const verdictConfig = {
     bg: "bg-sage/10",
     border: "border-sage/30",
     badgeBg: "bg-sage",
-    icon: "✓",
+    icon: <CheckIcon size={24} />,
     tagline: "You're good to go.",
   },
   HOLD: {
@@ -31,7 +32,7 @@ const verdictConfig = {
     bg: "bg-amber/10",
     border: "border-amber/30",
     badgeBg: "bg-amber",
-    icon: "⏸",
+    icon: <PauseIcon size={24} />,
     tagline: "Let this breathe first.",
   },
   DROP: {
@@ -40,10 +41,10 @@ const verdictConfig = {
     bg: "bg-rose-muted/10",
     border: "border-rose-muted/30",
     badgeBg: "bg-rose-muted",
-    icon: "✕",
+    icon: <XIcon size={24} />,
     tagline: "This one isn't worth it.",
   },
-} as const;
+};
 
 // Map raw TextSignal flags to human-readable observations shown in the UI
 function buildTextObservations(draft: string): string[] {
@@ -178,7 +179,7 @@ export default function AdvicePanel({
 
             {advice.holdDuration && (
               <div className="mt-4 inline-flex items-center gap-2 bg-white/70 border border-amber/20 rounded-full px-4 py-1.5">
-                <span className="text-amber text-xs">⏱</span>
+                <ClockIcon size={13} className="text-amber shrink-0" />
                 <span className="text-xs text-stone-600">
                   Suggested wait:{" "}
                   <strong className="font-medium">{advice.holdDuration}</strong>
@@ -199,13 +200,10 @@ export default function AdvicePanel({
             <span className="font-medium text-stone-600">
               What we found in your text
             </span>
-            <span
-              className={`text-stone-300 transition-transform duration-200 ${
-                showSignals ? "rotate-180" : ""
-              }`}
-            >
-              ▾
-            </span>
+            <ChevronDownIcon
+              size={16}
+              className={`text-stone-300 transition-transform duration-200 ${showSignals ? "rotate-180" : ""}`}
+            />
           </button>
 
           {showSignals && (
@@ -223,13 +221,10 @@ export default function AdvicePanel({
                     obs.toLowerCase().includes("doubt");
                   return (
                     <li key={obs} className="flex items-start gap-2.5 text-sm">
-                      <span
-                        className={`mt-0.5 shrink-0 ${
-                          isWarning ? "text-amber" : "text-sage"
-                        }`}
-                      >
-                        {isWarning ? "⚠" : "✓"}
-                      </span>
+                      {isWarning
+                        ? <AlertIcon size={14} className="mt-0.5 shrink-0 text-amber" />
+                        : <CheckIcon size={14} className="mt-0.5 shrink-0 text-sage" />
+                      }
                       <span className="text-stone-600">{obs}</span>
                     </li>
                   );

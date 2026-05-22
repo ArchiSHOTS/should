@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { LockIcon, LeafIcon } from "@/components/Icons";
 import MnemonicAuth from "@/components/MnemonicAuth";
 import GrowthGallery from "@/components/GrowthGallery";
 import type { AuthState } from "@/types";
@@ -75,7 +76,7 @@ export default function GalleryPage() {
           <GrowthGallery auth={auth} />
         ) : (
           <div className="text-center py-20">
-            <p className="text-5xl mb-5">🔒</p>
+            <div className="flex justify-center mb-5 text-sage"><LockIcon size={48} /></div>
             <h2 className="text-xl font-serif text-stone-700 mb-3">
               This journal is locked.
             </h2>

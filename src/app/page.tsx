@@ -9,6 +9,10 @@ import {
 } from "framer-motion";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import {
+  PencilIcon, PauseIcon, CompassIcon,
+  ShieldIcon, PenIcon, UsersIcon, BookOpenIcon,
+} from "@/components/Icons";
 
 // ── Shared animation helpers ──────────────────────────────────────────────────
 
@@ -61,37 +65,37 @@ const steps = [
     title: "Paste",
     subtitle: "Write without a filter.",
     body: "Drop your raw, unedited draft into the editor. No judgment, no audience — just your thoughts as they are right now.",
-    icon: "✍️",
+    icon: <PencilIcon size={22} />,
   },
   {
     number: "02",
     title: "Pause",
     subtitle: "Three honest questions.",
     body: "We ask about your context, your mood, and what you're actually hoping to achieve. The slowdown is the point.",
-    icon: "⏸",
+    icon: <PauseIcon size={22} />,
   },
   {
     number: "03",
     title: "Decide",
     subtitle: "Post, hold, or let go.",
     body: "Your draft gets a verdict — rooted in what you wrote and how you feel — with a Stoic quote to sit with before you act.",
-    icon: "🧭",
+    icon: <CompassIcon size={22} />,
   },
 ];
 
 const proFeatures = [
   {
-    icon: "✦",
+    icon: <PenIcon size={18} />,
     title: "Rephrasing Help",
     body: "Get AI-assisted rewrites that preserve your intent while cooling the temperature of your language.",
   },
   {
-    icon: "◎",
+    icon: <UsersIcon size={18} />,
     title: "Inner Circle Voting",
     body: "Send a draft to up to 3 trusted people — anonymously — and collect their honest reactions before you post.",
   },
   {
-    icon: "📖",
+    icon: <BookOpenIcon size={18} />,
     title: "Growth Gallery",
     body: "Your encrypted journal of every thought you paused on. Revisit the posts you didn't send — and reflect on the ones you did.",
   },
@@ -197,8 +201,8 @@ export default function LandingPage() {
         >
           <div className="bg-white border border-stone-100 rounded-3xl shadow-xl shadow-stone-900/5 p-8 text-left">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-amber flex items-center justify-center text-white font-bold text-sm">
-                ⏸
+              <div className="w-9 h-9 rounded-xl bg-amber flex items-center justify-center text-white">
+                <PauseIcon size={18} />
               </div>
               <div>
                 <p className="text-xs text-stone-400 uppercase tracking-widest">
@@ -248,7 +252,7 @@ export default function LandingPage() {
               className="bg-white border border-stone-100 rounded-3xl p-8 hover:shadow-md hover:shadow-stone-900/5 transition-shadow duration-300 group"
             >
               <div className="flex items-center justify-between mb-6">
-                <span className="text-2xl">{step.icon}</span>
+                <span className="text-sage">{step.icon}</span>
                 <span className="text-xs font-mono text-stone-300">{step.number}</span>
               </div>
               <h3 className="font-serif text-2xl text-stone-900 mb-1 group-hover:text-sage transition-colors">
@@ -271,8 +275,8 @@ export default function LandingPage() {
         <FadeUp>
           <div className="bg-stone-900 text-white rounded-3xl p-10 sm:p-14 flex flex-col sm:flex-row gap-10 items-start">
             {/* Shield */}
-            <div className="shrink-0 w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-3xl">
-              🛡
+            <div className="shrink-0 w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-sage">
+              <ShieldIcon size={32} />
             </div>
 
             <div className="flex-1">
