@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-second-thought-vercel.app"),
+  metadataBase: new URL("https://yoursecondthought.com"),
   title: "Your Second Thought — Think Before You Post",
   description:
     "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: "Your Second Thought — Think Before You Post",
     description:
       "Write your draft. Answer three honest questions. Get a verdict — and post from a calmer place. No sign-up, no email, no tracking.",
-    url: "https://your-second-thought-vercel.app",
+    url: "https://yoursecondthought.com",
     siteName: "Your Second Thought",
     images: [
       {
