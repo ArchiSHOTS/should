@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { AlertIcon } from "@/components/Icons";
 import {
   generateMnemonic,
   validateMnemonic,
@@ -118,7 +119,7 @@ export default function MnemonicAuth({ onAuth, onClose }: MnemonicAuthProps) {
             </p>
 
             <div className="bg-amber/10 border border-amber/25 rounded-2xl p-4 mb-8 flex gap-3">
-              <span className="text-amber shrink-0 mt-0.5">⚠</span>
+              <AlertIcon size={15} className="text-amber shrink-0 mt-0.5" />
               <p className="text-xs text-stone-600 leading-relaxed">
                 <strong>We cannot reset your account.</strong> Lose the words, lose
                 the data. There is no recovery option.

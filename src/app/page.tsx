@@ -1,7 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import MnemonicAuth from "@/components/MnemonicAuth";
+import type { AuthState } from "@/types";
 import {
   motion,
   useInView,
@@ -10,8 +12,9 @@ import {
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import {
-  PencilIcon, PauseIcon, CompassIcon,
-  ShieldIcon, PenIcon, UsersIcon, BookOpenIcon,
+  PencilIcon, PauseIcon, CompassIcon, ShieldIcon,
+  PenIcon, UsersIcon, BookOpenIcon,
+  FileTextIcon, SlidersIcon, TargetIcon,
 } from "@/components/Icons";
 
 // ── Shared animation helpers ──────────────────────────────────────────────────
@@ -87,17 +90,32 @@ const proFeatures = [
   {
     icon: <PenIcon size={18} />,
     title: "Rephrasing Help",
-    body: "Get AI-assisted rewrites that preserve your intent while cooling the temperature of your language.",
+    body: "Get AI-assisted rewrites that preserve your intent while dialling down the temperature. Same thought, sharper delivery.",
   },
   {
     icon: <UsersIcon size={18} />,
-    title: "Inner Circle Voting",
-    body: "Send a draft to up to 3 trusted people — anonymously — and collect their honest reactions before you post.",
+    title: "Inner Circle",
+    body: "Pick three people whose judgement you trust. Each responds to your draft privately — completely unaware of the others. Three honest takes, zero groupthink.",
   },
   {
     icon: <BookOpenIcon size={18} />,
     title: "Growth Gallery",
     body: "Your encrypted journal of every thought you paused on. Revisit the posts you didn't send — and reflect on the ones you did.",
+  },
+  {
+    icon: <FileTextIcon size={18} />,
+    title: "Longer Notes",
+    body: "Free yourself from the character limit. Write full threads, detailed posts, long-form reflections — and get a thorough verdict on every word.",
+  },
+  {
+    icon: <SlidersIcon size={18} />,
+    title: "Channel Aware",
+    body: "Tell us where you're posting. What lands on LinkedIn can backfire on X. Your verdict calibrates to the platform's culture, audience, and unwritten rules.",
+  },
+  {
+    icon: <TargetIcon size={18} />,
+    title: "Goal-Based Feedback",
+    body: "Set your personal posting rules — stay out of drama, protect your brand, project more calm. Every draft is checked against the standards you've set for yourself.",
   },
 ];
 
@@ -118,6 +136,20 @@ export default function LandingPage() {
 
   const proRef = useRef<HTMLDivElement>(null);
   const proInView = useInView(proRef, { once: true, margin: "-80px" });
+
+  const [auth, setAuth] = useState<AuthState | null>(null);
+  const [showAuth, setShowAuth] = useState(false);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("sip_mnemonic");
+    if (stored) setAuth({ mnemonic: stored });
+  }, []);
+
+  function handleAuth(state: AuthState) {
+    sessionStorage.setItem("sip_mnemonic", state.mnemonic);
+    setAuth(state);
+    setShowAuth(false);
+  }
 
   return (
     <div className="min-h-screen bg-background text-stone-800 overflow-x-hidden">
@@ -369,16 +401,22 @@ export default function LandingPage() {
             <p className="text-sm text-stone-500 mb-6">
               Billed annually · Cancel anytime
             </p>
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              disabled
-              className="w-full py-3 rounded-full bg-sage text-white text-sm font-medium opacity-50 cursor-not-allowed"
-            >
-              Join the waitlist
-            </motion.button>
+            {auth ? (
+              <div className="w-full py-3 rounded-full bg-sage/10 border border-sage/30 text-sage text-sm font-medium flex items-center justify-center gap-2">
+                <span>✓</span> You&apos;re on the waitlist
+              </div>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setShowAuth(true)}
+                className="w-full py-3 rounded-full bg-sage text-white text-sm font-medium hover:bg-sage-dark transition-colors"
+              >
+                Join the waitlist for Pro
+              </motion.button>
+            )}
             <p className="text-xs text-stone-400 mt-3">
-              Launching later this year
+              {auth ? "We'll reach out when Pro launches." : "No email needed — your passphrase is your place in line."}
             </p>
           </div>
         </FadeUp>
@@ -421,6 +459,13 @@ export default function LandingPage() {
 
       {/* ── FOOTER ──────────────────────────────────────────────────────── */}
       <SiteFooter />
+
+      {showAuth && (
+        <MnemonicAuth
+          onAuth={handleAuth}
+          onClose={() => setShowAuth(false)}
+        />
+      )}
     </div>
   );
 }
